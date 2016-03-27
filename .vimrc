@@ -61,10 +61,20 @@ set autoindent
 set cindent
 set smartindent
 set cursorline
+highlight LineNR       ctermfg=136 cterm=bold
+highlight CursorLineNR ctermfg=197 cterm=bold
 set expandtab
 set mouse=a
 filetype on
 syntax enable
+"set encoding=utf-8
+set clipboard=unnamedplus
+set paste
+set sol
+
+""DirDiff by Sungmin
+let g:DirDiffEnableMappings = 1
+let g:DirDiffExcludes = ".svn,build,*.pyc,.*.swp,arm,mips,power,sparc,x86,o3"
 
 ""Nerdcommenter by Sungmin
 filetype plugin on
@@ -73,13 +83,12 @@ filetype plugin on
 set laststatus=2
 set ttimeoutlen=50
 set term=xterm-256color
-"let g:airline_theme='base16_monokai'
+let g:airline_theme='powerlineish'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tmuxline#enabled = 0
-"set encoding=utf-8
 "let g:airline_powerlinei_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -87,10 +96,9 @@ endif
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
-
 ""indentLine by Sungmin
-let g:indentLine_color_term = 6
-"let g:indentLine_color_term = 239
+"let g:indentLine_color_term = 6
+let g:indentLine_color_term = 239
 "let g:indentLine_char = '│'
 nmap <F10> :call CopyToggle()<CR>
 function! CopyToggle()
@@ -155,19 +163,16 @@ autocmd FileType txt
 
 
 ""Ctags by Sungmin
-set tags=./tags,tags,../tags
+set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
 ""up-to-date rocket-chip all-scala tags! 16.02.17
-"set tags=/home/sungmin/tp-taggedArch/rocket-chip/tags
-
-""gem5 for taggedArch! 16.02.28
-"set tags=/home/sungmin/tp-taggedArch/typed-gem5/tags
-
+set tags+=/home/sungmin/tp-taggedArch/rocket-chip/tags
 ""gem5 for taggedArch in svn! 16.03.08
-set tags=/home/sungmin/svnroot/projects/typedarch/branches/typedisa_sm/gem5/tags
-
+set tags+=/home/sungmin/svnroot/projects/typedarch/branches/typedisa_sm/gem5/tags
 ""Previous tags
-"set tags=/home/sungmin/svnroot/projects/typedarch/branches/isca2016/gem5/tags
-"set tags=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_jrop/gem5/tags
-"set tags=/home/sungmin/rocketcore-gitlab/rocket-chip/riscv-tools/riscv-pk/tags
-"set tags=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_vbbi/gem5/tags
-"set tags=/home/sungmin/helios-server/tags
+""gem5 for taggedArch! 16.02.28
+"set tags+=/home/sungmin/tp-taggedArch/typed-gem5/tags
+"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016/gem5/tags
+"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_jrop/gem5/tags
+"set tags+=/home/sungmin/rocketcore-gitlab/rocket-chip/riscv-tools/riscv-pk/tags
+"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_vbbi/gem5/tags
+"set tags+=/home/sungmin/helios-server/tags
