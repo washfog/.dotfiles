@@ -76,7 +76,7 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
+    alias grep='grep --color=auto --exclude-dir=.svn' # Sungmin
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
@@ -106,11 +106,17 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+## BYOBU-5.92
+export PATH=/home/sungmin/byobu/bin:$PATH
+
+## VIM/VI; Let's use Vim ver7.4
+alias vi='vim'
+
 ## BASE16 COLOR SCHEME
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-mocha.dark.sh"
 #BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.light.sh"
 BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.dark.sh"
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.dark.sh"
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-google.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 ## SVN
@@ -127,7 +133,7 @@ export PATH=/home/sungmin/alphaev67-unknown-linux-gnu/bin:$PATH
 #export GEM5=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_jrop/gem5
 #export GEM5=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_vbbi/gem5
 #export GEM5=/home/sungmin/tp-taggedArch/typed-gem5
-exprot GEM5=/home/sungmin/svnroot/projects/typedarch/branches/typedisa_sm/gem5
+export GEM5=/home/sungmin/svnroot/projects/typedarch/branches/typedisa_sm/gem5
 
 ## VIVADO
 export PATH=/opt/Xilinx/Vivado/2015.2/bin:$PATH
@@ -137,10 +143,16 @@ export PATH=/opt/Xilinx/SDK/2015.2/tps/lnx64/jre/bin:$PATH
 
 ## TYPED ISA
 export TYPED=/home/sungmin/svnroot/projects/typedarch/branches
+# MICRO2016 tagged architecture 16.03.22
+#export RISCV=/home/sungmin/svnroot/projects/typedarch/branches/implement/rocket-chip/riscv
+#export PATH=/home/implement/svnroot/projects/typedarch/branches/implement/rocket-chip/riscv/bin:$PATH
+# MICRO2016 tagged architecture 16.03.25
+export RISCV=/home/sungmin/tp-taggedArch/rocket-chip/riscv
+export PATH=/home/sungmin/tp-taggedArch/rocket-chip/riscv/bin:$PATH
 #export RISCV=/home/sungmin/svnroot/projects/typedarch/branches/sungmin/rocket-chip/riscv
-export RISCV=/home/sungmin/rocketcore-git/rocket-chip/riscv
 #export PATH=/home/sungmin/svnroot/projects/typedarch/branches/sungmin/rocket-chip/riscv/bin:$PATH
-export PATH=/home/sungmin/rocketcore-git/rocket-chip/riscv/bin:$PATH
+#export RISCV=/home/sungmin/rocketcore-git/rocket-chip/riscv
+#export PATH=/home/sungmin/rocketcore-git/rocket-chip/riscv/bin:$PATH
 
 ## TAGGED GEM5
 alias addtest='./build/ALPHA/gem5.opt configs/example/se.py --cpu-type=MinorCPU --caches --l2cache --l1i_size='16kB' --l1i_assoc=2 --l1d_size='32kB' --l1d_assoc=4 --l2_size='128kB' --l2_assoc=8 -c ../test/add'
@@ -148,6 +160,11 @@ alias addtest='./build/ALPHA/gem5.opt configs/example/se.py --cpu-type=MinorCPU 
 alias mailme='history | tail -n 1 | mutt nalbyul@gmail.com -s "END-success" || history | tail -n 1 | mutt -s "End-fail" nalbyul@gmail.com'
 
 ## RISCV C++ Cycle Accurate Simulator
+# MICRO16
+alias micro='./emulator-Top-DefaultCPPConfig +dramsim +memsize=1024 pk'
+alias microp='./emulator-Top-DefaultCPPConfig +dramsim +verbose +memsize=1024 pk'
+
+# previous ISCA15
 alias semlt='./emulator-Top-DefaultCPPConfig +dramsim +max-cycles=100000000000 +verbose pk '
 alias gemlt='./emulator-Top-DefaultCPPConfig +dramsim +max-cycles=100000000000 +verbose pk -c ../../lua-5.3.0/src/lua-op ../../lua-5.3.0/src/test.lua'
 alias gemlt-orig='./emulator-Top-DefaultCPPConfig +dramsim +max-cycles=1000000000 +verbose pk -c ../../lua-5.3.0/src/lua-orig ../../lua-5.3.0/src/test.lua'
