@@ -34,6 +34,7 @@ call vundle#begin()
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'will133/vim-dirdiff'
   Plugin 'vim-scripts/SyntaxRange'
+  Plugin 'tpope/vim-fugitive'
 
 	" All of your Plugins must be added before the following line
 	call vundle#end()            " required
@@ -67,10 +68,14 @@ set expandtab
 set mouse=a
 filetype on
 syntax enable
-"set encoding=utf-8
-set clipboard=unnamedplus
-set paste
-set sol
+set encoding=utf-8
+" set clipboard=unnamedplus
+" set paste
+" set sol
+
+""folds will be saved automatically!
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 ""DirDiff by Sungmin
 let g:DirDiffEnableMappings = 1
@@ -78,6 +83,11 @@ let g:DirDiffExcludes = ".svn,build,*.pyc,.*.swp,arm,mips,power,sparc,x86,o3"
 
 ""Nerdcommenter by Sungmin
 filetype plugin on
+let NERDSpaceDelims=1
+
+""Fugitive by Sungmin with airline
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
 
 ""Airline by Sungmin
 set laststatus=2
@@ -89,17 +99,20 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tmuxline#enabled = 0
-"let g:airline_powerlinei_fonts = 1
+" let g:airline_powerlinei_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:bufferline_echo = 0
 
 ""indentLine by Sungmin
 "let g:indentLine_color_term = 6
 let g:indentLine_color_term = 239
+" | ¦ ┆ ┊ │
 "let g:indentLine_char = '│'
+let g:indentLine_char = '|'
 nmap <F10> :call CopyToggle()<CR>
 function! CopyToggle()
   echo &mouse
