@@ -122,11 +122,11 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 ## BASE16 COLOR SCHEME
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.light.sh"
-BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.dark.sh"
-#BASE16_SHELL="$HOME/.config/base16-shell/base16-google.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 
 ## SVN
 export SVN_EDITOR=vim
