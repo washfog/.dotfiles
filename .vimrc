@@ -35,6 +35,7 @@ call vundle#begin()
   Plugin 'will133/vim-dirdiff'
   Plugin 'vim-scripts/SyntaxRange'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'godlygeek/tabular'
 
 	" All of your Plugins must be added before the following line
 	call vundle#end()            " required
@@ -51,6 +52,7 @@ call vundle#begin()
 	" see :h vundle for more details or wiki for FAQ
 	" Put your non-Plugin stuff after this line
 	"
+
 set ruler
 set bs=indent,eol,start
 set number
@@ -64,6 +66,7 @@ set smartindent
 set cursorline
 highlight LineNR       ctermfg=136 cterm=bold
 highlight CursorLineNR ctermfg=197 cterm=bold
+highlight CursorLine term=bold cterm=bold ctermbg=NONE ctermfg=NONE
 set expandtab
 set mouse=a
 filetype on
@@ -73,6 +76,7 @@ set encoding=utf-8
 " set paste
 " set sol
 set nowrap
+set hlsearch
 
 ""folds will be saved automatically!
 autocmd BufWinLeave *.* mkview
@@ -94,13 +98,14 @@ let g:airline#extensions#branch#empty_message = ''
 set laststatus=2
 set ttimeoutlen=50
 set term=xterm-256color
-let g:airline_theme='powerlineish'
+let g:airline_theme='simple'
+"let g:airline_theme='powerlineish'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tmuxline#enabled = 0
-" let g:airline_powerlinei_fonts = 1
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
