@@ -27,15 +27,24 @@ call vundle#begin()
 	" Avoid a name conflict with L9
 	""Plugin 'user/L9', {'name': 'newL9'}
 
+  " Visualize indentation level
 	Plugin 'Yggdroot/indentLine'
-	Plugin 'derekwyatt/vim-scala'
+  " Comment out the line easily
   Plugin 'scrooloose/nerdcommenter'
+  " Visualize tabs / infomation
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'will133/vim-dirdiff'
-  Plugin 'vim-scripts/SyntaxRange'
+  " Display git info with airline
   Plugin 'tpope/vim-fugitive'
+  " Display marks on linenum
+  Plugin 'kshenoy/vim-signature'
+  " Align the code easily
   Plugin 'godlygeek/tabular'
+  " Directory diff on vim
+  Plugin 'will133/vim-dirdiff'
+  " Others
+  Plugin 'vim-scripts/SyntaxRange'
+	Plugin 'derekwyatt/vim-scala'
 
 	" All of your Plugins must be added before the following line
 	call vundle#end()            " required
@@ -51,7 +60,6 @@ call vundle#begin()
 	"
 	" see :h vundle for more details or wiki for FAQ
 	" Put your non-Plugin stuff after this line
-	"
 
 set ruler
 set bs=indent,eol,start
@@ -76,7 +84,40 @@ set encoding=utf-8
 " set paste
 " set sol
 set nowrap
+map <Enter> o<ESC>
+""search-related
+set ignorecase
 set hlsearch
+highlight Search cterm=NONE ctermfg=lightyellow ctermbg=grey
+" *cterm-colors*
+" NR-16   NR-8    COLOR NAME 
+" 0       0       Black
+" 1       4       DarkBlue
+" 2       2       DarkGreen
+" 3       6       DarkCyan
+" 4       1       DarkRed
+" 5       5       DarkMagenta
+" 6       3       Brown, DarkYellow
+" 7       7       LightGray, LightGrey, Gray, Grey
+" 8       0*      DarkGray, DarkGrey
+" 9       4*      Blue, LightBlue
+" 10      2*      Green, LightGreen
+" 11      6*      Cyan, LightCyan
+" 12      1*      Red, LightRed
+" 13      5*      Magenta, LightMagenta
+" 14      3*      Yellow, LightYellow
+" 15      7*      White
+
+""Netrw setting
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 ""folds will be saved automatically!
 autocmd BufWinLeave *.* mkview
@@ -204,7 +245,6 @@ autocmd FileType txt
   \ set wm=2                       |
   \ set wrap linebreak nolist      |
   \ let g:tex_conceal=""
-
 
 ""Ctags by Sungmin
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
