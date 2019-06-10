@@ -85,8 +85,17 @@ set encoding=utf-8
 " set sol
 set nowrap
 map <Enter> o<ESC>
+if winbufnr(0)
+  map + <C-W>>
+  map - <C-W><
+endif
+""edit file in ex-command mode
+set wildignorecase
+set wildmenu
+set path+=**
 ""search-related
 set ignorecase
+set smartcase
 set hlsearch
 highlight Search cterm=NONE ctermfg=lightyellow ctermbg=grey
 " *cterm-colors*
@@ -109,11 +118,11 @@ highlight Search cterm=NONE ctermfg=lightyellow ctermbg=grey
 " 15      7*      White
 
 ""Netrw setting
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_banner = 0          "0:Head banner off
+let g:netrw_liststyle = 3       "3: tree style
+let g:netrw_browse_split = 4    "0:SameWin / 1:Hsplit / 2:Vsplit / 3:NewTab / 4:Preview
+let g:netrw_altv = 1            "0: SplitLeft / 1: SplitRight
+let g:netrw_winsize = 25        "Netrw width: Vexplore
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
