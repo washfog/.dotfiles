@@ -64,8 +64,8 @@ call vundle#begin()
 set ruler
 set bs=indent,eol,start
 set number
-set ts=2
-set sw=2
+set ts=4
+set sw=4
 set noet
 set sts=0
 set autoindent
