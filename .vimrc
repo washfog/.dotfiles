@@ -1,82 +1,67 @@
-""Vundle by Sungmin
+""Vundle setting
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-	" alternatively, pass a path where Vundle should install plugins
-	"call vundle#begin('~/some/path/here')
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-	" let Vundle manage Vundle, required
-	Plugin 'gmarik/Vundle.vim'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-	" The following are examples of different formats supported.
-	" Keep Plugin commands between vundle#begin/end.
-	" plugin on GitHub repo
-	""Plugin 'tpope/vim-fugitive'
-	" plugin from http://vim-scripts.org/vim/scripts.html
-	""Plugin 'L9'
-	" Git plugin not hosted on GitHub
-	""Plugin 'git://git.wincent.com/command-t.git'
-	" git repos on your local machine (i.e. when working on your own plugin)
-	""Plugin 'file:///home/gmarik/path/to/plugin'
-	" The sparkup vim script is in a subdirectory of this repo called vim.
-	" Pass the path to set the runtimepath properly.
-	""Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-	" Avoid a name conflict with L9
-	""Plugin 'user/L9', {'name': 'newL9'}
+" Visualize indentation level
+Plugin 'Yggdroot/indentLine'
+" Comment out the line easily
+Plugin 'scrooloose/nerdcommenter'
+" Visualize tabs / infomation
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Display git info with airline
+Plugin 'tpope/vim-fugitive'
+" Display marks on linenum
+Plugin 'kshenoy/vim-signature'
+" Align the code easily
+Plugin 'godlygeek/tabular'
+" Directory diff on vim
+Plugin 'will133/vim-dirdiff' "TODO: does it work?
+" Others
+Plugin 'vim-scripts/SyntaxRange' "TODO: check
+Plugin 'derekwyatt/vim-scala' "TODO: check
 
-  " Visualize indentation level
-	Plugin 'Yggdroot/indentLine'
-  " Comment out the line easily
-  Plugin 'scrooloose/nerdcommenter'
-  " Visualize tabs / infomation
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  " Display git info with airline
-  Plugin 'tpope/vim-fugitive'
-  " Display marks on linenum
-  Plugin 'kshenoy/vim-signature'
-  " Align the code easily
-  Plugin 'godlygeek/tabular'
-  " Directory diff on vim
-  Plugin 'will133/vim-dirdiff'
-  " Others
-  Plugin 'vim-scripts/SyntaxRange'
-	Plugin 'derekwyatt/vim-scala'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-	" All of your Plugins must be added before the following line
-	call vundle#end()            " required
-	filetype plugin indent on    " required
-	" To ignore plugin indent changes, instead use:
-	"filetype plugin on
-	"
-	" Brief help
-	" :PluginList       - lists configured plugins
-	" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-	" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-	" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-	"
-	" see :h vundle for more details or wiki for FAQ
-	" Put your non-Plugin stuff after this line
-
+""Common
 set ruler
 set bs=indent,eol,start
 set number
+
 set ts=4
 set sw=4
-set noet
 set sts=0
+set expandtab
+
 set autoindent
 set cindent
 set smartindent
+
+" set modeline "TODO: check function
+
 set cursorline
 highlight LineNR       ctermfg=136 cterm=bold
 highlight CursorLineNR ctermfg=197 cterm=bold
 highlight CursorLine term=bold cterm=bold ctermbg=NONE ctermfg=NONE
-set expandtab
+
 set mouse=a
+
+""for open files in ex-command mode
+set wildignorecase
+set wildmenu
+set path+=**
+
 filetype on
 syntax enable
 set encoding=utf-8
@@ -84,15 +69,21 @@ set encoding=utf-8
 " set paste
 " set sol
 set nowrap
+
+""buffer switch w/o saving
+set hidden
+
 map <Enter> o<ESC>
 if winbufnr(0)
-  map + <C-W>>
-  map - <C-W><
+    map + <C-W>>
+    map - <C-W><
 endif
+
 ""edit file in ex-command mode
 set wildignorecase
 set wildmenu
 set path+=**
+
 ""search-related
 set ignorecase
 set smartcase
@@ -157,7 +148,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -196,76 +187,64 @@ let g:indentLine_char = '│'
 "let g:indentLine_char = '|'
 nmap <F10> :call CopyToggle()<CR>
 function! CopyToggle()
-  echo &mouse
-  if &mouse == 'a'
-      exe ':IndentLinesDisable'
-      exe ':set nonu'
-      exe ':set mouse='
-  else
-      exe ':IndentLinesEnable'
-      exe ':set nu'
-      exe ':set mouse=a'
-  endif
+    echo &mouse
+    if &mouse == 'a'
+        exe ':IndentLinesDisable'
+        exe ':set nonu'
+        exe ':set mouse='
+    else
+        exe ':IndentLinesEnable'
+        exe ':set nu'
+        exe ':set mouse=a'
+    endif
 endfunction
 
 ""Filebuf & type by Channoh
 au BufRead *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \    exe "norm g'\"" |
-      \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \    exe "norm g'\"" |
+            \ endif
 augroup Filetype
-  au!
-  au BufRead,BufNewFile *{Makefile,makefile}*   set filetype=make
-  au BufRead,BufNewFile *.{ll,bc}         set filetype=llvm
-  au BufRead,BufNewFile *.td            set filetype=tablegen
-  au BufRead,BufNewFile *.rst           set filetype=rest
-  au BufRead,BufNewFile *.html            set filetype=html
-  au BufRead,BufNewFile *.tex           set filetype=tex
-  au BufRead,BufNewFile *.md            set filetype=markdown
-  au BufRead,BufNewFile *.{gnuplot,gp}        set filetype=gnuplot
-  " au BufRead,BufNewFile config                    set filetype=config
-  au BufRead,BufNewFile *.cl            set filetype=opencl
-  au BufRead,BufNewFile *.{dat,data,csv}      set filetype=csv
-  au BufRead,BufNewFile *.gdb           set filetype=gdb
-  au BufRead,BufNewFile *.python        set filetype=python
-  au BufRead,BufNewFile *.bb            set filetype=sh
-  au BufRead,BufNewFile *.bbclass       set filetype=python
-  ""for paper review/rebuttal files
-  au BufRead,BufNewFile *.txt           set filetype=txt
-  ""for Gem5-alpha .isa files
-  au BufRead,BufNewFile *.isa           set filetype=cpp 
-      \ | exec ":call SyntaxRange#Include('^def', '}}', 'python')"
+    au!
+    au BufRead,BufNewFile *{Makefile,makefile}*   set filetype=make
+    au BufRead,BufNewFile *.{ll,bc}         set filetype=llvm
+    au BufRead,BufNewFile *.td            set filetype=tablegen
+    au BufRead,BufNewFile *.rst           set filetype=rest
+    au BufRead,BufNewFile *.html            set filetype=html
+    au BufRead,BufNewFile *.tex           set filetype=tex
+    au BufRead,BufNewFile *.md            set filetype=markdown
+    au BufRead,BufNewFile *.{gnuplot,gp}        set filetype=gnuplot
+    " au BufRead,BufNewFile config                    set filetype=config
+    au BufRead,BufNewFile *.cl            set filetype=opencl
+    au BufRead,BufNewFile *.{dat,data,csv}      set filetype=csv
+    au BufRead,BufNewFile *.gdb           set filetype=gdb
+    au BufRead,BufNewFile *.python        set filetype=python
+    au BufRead,BufNewFile *.bb            set filetype=sh
+    au BufRead,BufNewFile *.bbclass       set filetype=python
+    ""for paper review/rebuttal files
+    au BufRead,BufNewFile *.txt           set filetype=txt
+    ""for Gem5-alpha .isa files
+    au BufRead,BufNewFile *.isa           set filetype=cpp 
+                \ | exec ":call SyntaxRange#Include('^def', '}}', 'python')"
 augroup END
 if &diff
-  set diffopt+=iwhite
+    set diffopt+=iwhite
 endif
 ""word wrap::command: gq
 ""Latex
 autocmd FileType tex
-  \ set tw=75                      |
-  \ set formatoptions+=t           |
-  \ set wm=2                       |
-  \ set wrap linebreak nolist      |
-  \ let g:tex_conceal=""
+            \ set tw=75                      |
+            \ set formatoptions+=t           |
+            \ set wm=2                       |
+            \ set wrap linebreak nolist      |
+            \ let g:tex_conceal=""
 ""Text
 autocmd FileType txt
-  \ set tw=75                      |
-  \ set formatoptions+=t           |
-  \ set wm=2                       |
-  \ set wrap linebreak nolist      |
-  \ let g:tex_conceal=""
+            \ set tw=75                      |
+            \ set formatoptions+=t           |
+            \ set wm=2                       |
+            \ set wrap linebreak nolist      |
+            \ let g:tex_conceal=""
 
 ""Ctags by Sungmin
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
-""up-to-date rocket-chip all-scala tags! 16.02.17
-set tags+=/home/sungmin/tp-taggedArch/rocket-chip/tags
-""gem5 for taggedArch in svn! 16.03.08
-set tags+=/home/sungmin/svnroot/projects/typedarch/branches/typedisa_sm/gem5/tags
-""Previous tags
-""gem5 for taggedArch! 16.02.28
-"set tags+=/home/sungmin/tp-taggedArch/typed-gem5/tags
-"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016/gem5/tags
-"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_jrop/gem5/tags
-"set tags+=/home/sungmin/rocketcore-gitlab/rocket-chip/riscv-tools/riscv-pk/tags
-"set tags+=/home/sungmin/svnroot/projects/typedarch/branches/isca2016_vbbi/gem5/tags
-"set tags+=/home/sungmin/helios-server/tags

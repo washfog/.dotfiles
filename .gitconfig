@@ -10,3 +10,5 @@
     prompt = false
 [core]
 	editor = vim
+[credential]
+	helper = store

@@ -85,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -164,3 +164,20 @@ alias mailme='history | tail -n 1 | mutt nalbyul@gmail.com -s "END-success" || h
 # MICRO16
 alias emul='./emulator-Top-DefaultCPPConfig +dramsim +memsize=1024 pk'
 alias emulp='./emulator-Top-DefaultCPPConfig +dramsim +verbose +memsize=1024 pk'
+
+## Powerline-go prompt
+export GOPATH=~/local
+function _update_ps1() {
+    PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
+
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+
+    #set "?"
+}
+
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
